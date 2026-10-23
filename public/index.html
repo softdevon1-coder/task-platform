@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TaskHits - Plataforma de Intercambio & Pruebas QA</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- BARRA SUPERIOR -->
+  <header class="navbar">
+    <div class="logo">
+      <span class="logo-icon">⚡</span>
+      <span class="logo-text">Task<strong>Hits</strong></span>
+      <span class="badge badge-demo">Proyecto Escolar Demo</span>
+    </div>
+    
+    <div class="header-controls">
+      <div class="user-selector">
+        <label for="userSelect">Perfil Activo:</label>
+        <select id="userSelect">
+          <option value="estudiante">Estudiante (Humano)</option>
+          <option value="bot_tester">Bot de Pruebas (QA)</option>
+        </select>
+      </div>
+
+      <div class="points-pill">
+        <span class="points-label">Saldo:</span>
+        <span id="userPoints" class="points-value">0</span>
+        <span class="points-currency">PTS</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="container">
+    
+    <!-- COLUMNA IZQUIERDA: TAREAS DISPONIBLES Y VISUALIZADOR -->
+    <section class="main-column">
+      
+      <!-- VISOR DE TAREA EN CURSO (Simulador de ventana de interacción) -->
+      <div id="taskViewerCard" class="card task-viewer hidden">
+        <div class="viewer-header">
+          <div class="window-dots">
+            <span class="dot red"></span>
+            <span class="dot yellow"></span>
+            <span class="dot green"></span>
+          </div>
+          <span id="viewerTitle" class="viewer-url">Cargando tarea...</span>
+          <span class="badge badge-live">EN PROGRESO</span>
+        </div>
+
+        <div class="viewer-body">
+          <div class="timer-circle">
+            <span id="countdownNumber">0</span>
+            <span class="timer-sub">segundos</span>
+          </div>
+          <div class="viewer-info">
+            <h3 id="currentTaskTitle">Título de la tarea</h3>
+            <p id="currentTaskUrl" class="url-text">https://ejemplo.com</p>
+            <p class="recompensa-info">Recompensa garantizada: <strong id="currentTaskReward">0</strong> puntos</p>
+          </div>
+        </div>
+
+        <div class="viewer-footer">
+          <button id="btnClaimPoints" class="btn btn-primary" disabled>
+            Reclamar Puntos (Espera el temporizador)
+          </button>
+          <button id="btnTestCheat" class="btn btn-danger-outline" title="Simula un bot tramposo que reclama antes de tiempo">
+            ⚡ Probar reclamo tramposo (Test Anti-Fraude)
+          </button>
+        </div>
+      </div>
+
+      <!-- LISTA DE TAREAS -->
+      <div class="section-title-row">
+        <h2>Tareas Disponibles para Ganar Puntos</h2>
+        <button id="btnRefresh" class="btn btn-secondary btn-sm">↻ Actualizar</button>
+      </div>
+
+      <div id="tasksGrid" class="tasks-grid">
+        <!-- Renderizado dinámicamente con JavaScript -->
+      </div>
+    </section>
+
+    <!-- COLUMNA DERECHA: PUBLICAR TAREA Y REGISTRO DE SEGURIDAD -->
+    <aside class="sidebar">
+      
+      <!-- CREAR TAREA -->
+      <div class="card">
+        <h3>Publicar Nueva Tarea</h3>
+        <p class="card-desc">Gasta tus puntos para que otros usuarios o el bot visiten tu enlace.</p>
+        
+        <form id="createTaskForm">
+          <div class="form-group">
+            <label>Título de la tarea</label>
+            <input type="text" id="newTaskTitle" placeholder="Ej: Visitar mi canal o blog" required>
+          </div>
+          
+          <div class="form-group">
+            <label>URL de destino</label>
+            <input type="url" id="newTaskUrl" placeholder="https://ejemplo.com" required>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Duración (segundos)</label>
+              <input type="number" id="newTaskDuration" value="5" min="3" max="30">
+            </div>
+            <div class="form-group">
+              <label>Recompensa (puntos)</label>
+              <input type="number" id="newTaskReward" value="20" min="5" max="100">
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-success btn-full">Publicar Tarea</button>
+        </form>
+      </div>
+
+      <!-- REGISTRO DE ACTIVIDAD Y SEGURIDAD ANTI-BOT -->
+      <div class="card logs-card">
+        <div class="logs-header">
+          <h3>Monitor de Seguridad del Servidor</h3>
+          <span class="live-indicator">● EN VIVO</span>
+        </div>
+        <p class="card-desc">Observa cómo el backend detecta reclamos válidos o intentos de fraude.</p>
+
+        <div id="logsContainer" class="logs-container">
+          <!-- Logs renderizados en vivo -->
+        </div>
+      </div>
+
+      <!-- GUÍA PARA EJECUTAR EL BOT AUTOMATIZADO -->
+      <div class="card bot-guide-card">
+        <h3>🤖 Ejecutar Bot Automatizado</h3>
+        <p class="card-desc">Ejecuta el script de prueba en tu terminal para ver el bot completando tareas automáticamente:</p>
+        <div class="code-box">
+          <code>node bot.js</code>
+        </div>
+        <p class="code-sub">Para probar la detección de trampas:</p>
+        <div class="code-box">
+          <code>node bot.js --cheat</code>
+        </div>
+      </div>
+
+    </aside>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

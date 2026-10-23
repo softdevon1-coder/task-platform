@@ -1,0 +1,13 @@
+{
+  "name": "task-exchange-platform",
+  "version": "1.0.0",
+  "description": "Plataforma educativa de intercambio de tareas y puntos con validación anti-fraude y bot de pruebas",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "bot": "node bot.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
